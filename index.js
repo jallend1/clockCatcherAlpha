@@ -13,6 +13,7 @@ function draw() {
 
 function drawFallingNumbers() {
     ctx.fillStyle = "black";
+    ctx.textAlign = "center";
     for (let i = 0; i < numbers.length; i++) {
         let number = numbers[i];
         ctx.fillText(number.number, number.x, number.y);
@@ -39,7 +40,6 @@ function drawFooterLine() {
 function drawFooterHours() {
     ctx.fillStyle = "black";
     ctx.font = "20px Arial";
-    ctx.textAlign = "center";
     for (let i = 0; i < 24; i++) {
         ctx.fillText(i, i * (canvas.width / 24) + (canvas.width / 24) / 2, canvas.height - 20);
     }
@@ -58,7 +58,7 @@ function drawCanvasFooter() {
 
 function generateFallingNumber() {
     let number = Math.floor(Math.random() * 10);
-    let x = Math.floor(Math.random() * (canvas.width - 20));
+    let x = Math.floor(Math.random() * 24) * (canvas.width / 24) + (canvas.width / 24) / 2;
     let y = 0;
     let speed = Math.random() * 2 + 1;
     numbers.push({ number: number, x: x, y: y, speed: speed });
