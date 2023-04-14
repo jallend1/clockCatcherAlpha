@@ -13,7 +13,7 @@ function draw() {
 }
 
 function drawFallingNumbers() {
-    ctx.fillStyle = "black";
+    ctx.fillStyle = "white";
     ctx.textAlign = "center";
     for (let i = 0; i < numbers.length; i++) {
         let number = numbers[i];
@@ -32,6 +32,7 @@ function drawFallingNumbers() {
 }
 
 function drawFooterLine() {
+    ctx.strokeStyle = "white";
     ctx.beginPath();
     ctx.moveTo(0, canvas.height - 50);
     ctx.lineTo(canvas.width, canvas.height - 50);
@@ -39,7 +40,7 @@ function drawFooterLine() {
 }
 
 function drawFooterHours() {
-    ctx.fillStyle = "black";
+    ctx.fillStyle = "white";
     ctx.font = "20px Arial";
     for (let i = 0; i < 24; i++) {
         ctx.fillText(i, i * (canvas.width / DISPLAYED_HOURS) + (canvas.width / DISPLAYED_HOURS) / 2, canvas.height - 20);
@@ -47,7 +48,7 @@ function drawFooterHours() {
 }
 
 function drawFooterSelectedHour() {
-    ctx.fillStyle = "yellow";
+    ctx.fillStyle = "orange";
     ctx.fillRect(currentHour * (canvas.width / DISPLAYED_HOURS), canvas.height - 50, canvas.width / DISPLAYED_HOURS, 50);
 }
 
