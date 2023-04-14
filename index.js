@@ -1,6 +1,7 @@
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 const numbers = [];
+const DISPLAYED_HOURS = 24;
 let currentHour = 0;
 
 function draw() {
@@ -21,7 +22,7 @@ function drawFallingNumbers() {
         // Check if the number has reached the bottom line
         if (number.y > canvas.height - 50) {
             // Check if the number is aligned with the current hour
-            if (Math.floor(number.x / (canvas.width / 24)) == currentHour) {
+            if (Math.floor(number.x / (canvas.width / DISPLAYED_HOURS)) == currentHour) {
                 // Do something neat like add points
             }
             numbers.splice(i, 1);
@@ -41,13 +42,13 @@ function drawFooterHours() {
     ctx.fillStyle = "black";
     ctx.font = "20px Arial";
     for (let i = 0; i < 24; i++) {
-        ctx.fillText(i, i * (canvas.width / 24) + (canvas.width / 24) / 2, canvas.height - 20);
+        ctx.fillText(i, i * (canvas.width / DISPLAYED_HOURS) + (canvas.width / DISPLAYED_HOURS) / 2, canvas.height - 20);
     }
 }
 
 function drawFooterSelectedHour() {
     ctx.fillStyle = "yellow";
-    ctx.fillRect(currentHour * (canvas.width / 24), canvas.height - 50, canvas.width / 24, 50);
+    ctx.fillRect(currentHour * (canvas.width / DISPLAYED_HOURS), canvas.height - 50, canvas.width / DISPLAYED_HOURS, 50);
 }
 
 function drawCanvasFooter() {
@@ -57,11 +58,11 @@ function drawCanvasFooter() {
 }
 
 function generateFallingNumber() {
-    let number = Math.floor(Math.random() * 10);
-    let x = Math.floor(Math.random() * 24) * (canvas.width / 24) + (canvas.width / 24) / 2;
+    let number = Math.floor(Math.random() * DISPLAYED_HOURS);
+    let x = Math.floor(Math.random() * DISPLAYED_HOURS) * (canvas.width / DISPLAYED_HOURS) + (canvas.width / DISPLAYED_HOURS) / 2;
     let y = 0;
-    let speed = Math.random() * 2 + 1;
-    numbers.push({ number: number, x: x, y: y, speed: speed });
+    let speed = Math.floor(Math.random() * 3) + 1;
+    numbers.push({ number, x, y, speed });
 }
 
 setInterval(generateFallingNumber, 1000);
@@ -71,7 +72,7 @@ draw();
 document.addEventListener("keydown", (e) => {
     if (e.code === "ArrowLeft" && currentHour > 0) {
         currentHour--;
-    } else if (e.code === "ArrowRight" && currentHour < 23) {
+    } else if (e.code === "ArrowRight" && currentHour < DISPLAYED_HOURS - 1) {
         currentHour++;
     }
 });
