@@ -1,5 +1,9 @@
 const canvas = document.getElementById("gameCanvas");
+canvas.width = window.innerWidth * .9;
+canvas.height = window.innerHeight * .9 ;
+
 const ctx = canvas.getContext("2d");
+
 const numbers = [];
 const DISPLAYED_HOURS = 24;
 let currentHour = 0;
@@ -62,11 +66,11 @@ function generateFallingNumber() {
     let number = Math.floor(Math.random() * DISPLAYED_HOURS);
     let x = Math.floor(Math.random() * DISPLAYED_HOURS) * (canvas.width / DISPLAYED_HOURS) + (canvas.width / DISPLAYED_HOURS) / 2;
     let y = 0;
-    let speed = Math.floor(Math.random() * 3) + 1;
+    let speed = Math.floor(Math.random() * 10) + 1;
     numbers.push({ number, x, y, speed });
 }
 
-setInterval(generateFallingNumber, 1000);
+setInterval(generateFallingNumber, 100);
 
 draw();
 
