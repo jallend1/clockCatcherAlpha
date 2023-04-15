@@ -1,6 +1,6 @@
 const canvas = document.getElementById("gameCanvas");
-canvas.width = window.innerWidth * .9;
-canvas.height = window.innerHeight * .9 ;
+canvas.width = window.innerWidth ;
+canvas.height = window.innerHeight;
 
 const ctx = canvas.getContext("2d");
 
@@ -11,14 +11,15 @@ let currentHour = 0;
 function draw() {
     // Clears canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    drawCanvasFooter();
+    // drawCanvasFooter();
     drawFallingNumbers();
     requestAnimationFrame(draw);
 }
 
 function drawFallingNumbers() {
-    ctx.fillStyle = "white";
+    ctx.fillStyle = "green";
     ctx.textAlign = "center";
+    ctx.font = "16px Arial";
     for (let i = 0; i < numbers.length; i++) {
         let number = numbers[i];
         ctx.fillText(number.number, number.x, number.y);
@@ -63,14 +64,16 @@ function drawCanvasFooter() {
 }
 
 function generateFallingNumber() {
-    let number = Math.floor(Math.random() * DISPLAYED_HOURS);
-    let x = Math.floor(Math.random() * DISPLAYED_HOURS) * (canvas.width / DISPLAYED_HOURS) + (canvas.width / DISPLAYED_HOURS) / 2;
-    let y = 0;
-    let speed = Math.floor(Math.random() * 10) + 1;
-    numbers.push({ number, x, y, speed });
+    const number = Math.floor(Math.random() * DISPLAYED_HOURS);
+    const number2 = Math.floor(Math.random() * DISPLAYED_HOURS);
+    const number3 = Math.floor(Math.random() * DISPLAYED_HOURS);
+    const x = Math.floor(Math.random() * DISPLAYED_HOURS) * (canvas.width / DISPLAYED_HOURS) + (canvas.width / DISPLAYED_HOURS) / 2;
+    const y = 0;
+    let speed = Math.floor(Math.random() * 20) + 1;
+    numbers.push({ number, x, y, speed }, { number: number2, x, y, speed }, { number: number3, x, y, speed });
 }
 
-setInterval(generateFallingNumber, 100);
+setInterval(generateFallingNumber, 10);
 
 draw();
 
